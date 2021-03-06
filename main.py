@@ -2,4 +2,8 @@ from board import Board
 
 board = Board()
 
-print(board)
+def main():
+    print(board)
+
+if __name__ == '__main__':
+    main()
