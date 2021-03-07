@@ -1,6 +1,5 @@
 first round TO-DO list:
 
-    - listener for keystrokes
     - board function to make "moves"
     - function to slove the game 
     - a "game over" screen
@@ -10,4 +9,4 @@ things we have so far:
     - 2D array to represent the solved board (aka goal)
     - location variable to keep track of empty cell (tile)
     - function to display board on the screen
-    
+    - listener for keystrokes
