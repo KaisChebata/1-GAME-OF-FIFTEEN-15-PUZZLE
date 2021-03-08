@@ -1,4 +1,5 @@
 from copy import deepcopy
+from os import system
 
 class Board:
     """Models the board for the game (15 puzzle)"""
@@ -25,6 +26,10 @@ class Board:
         # __repr__ must return some string
         return ""
     
+    def refresh(self):
+        system('clear')
+        print(self)
+    
     def move(self, board, e_loc, x, y):
         """General move function, that will moves empty tile around, 
         exchange its position with neighbor tile"""
@@ -40,13 +45,14 @@ class Board:
         # in x, y = y, x fashoin
         # Swap
         board[e_loc[0]][e_loc[1]], board[e_loc[0] + x][e_loc[1] + y] = (
-            board[e_loc[0] + x][e_loc[1] + y], 
-            board[e_loc[0] + x][e_loc[1] + y]
+            board[e_loc[0] + x][e_loc[1] + y], board[e_loc[0]][e_loc[1]]
         )
 
         # update empty tile location
         e_loc[0] += x
         e_loc[1] += y
+
+        return board, e_loc
     
     def move_up(self, board, e_loc):
         """move_up function makes an empty tile moves up"""
