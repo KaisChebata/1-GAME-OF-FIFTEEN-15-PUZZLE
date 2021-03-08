@@ -24,3 +24,26 @@ class Board:
         
         # __repr__ must return some string
         return ""
+    
+    def move(self, board, e_loc, x, y):
+
+        # check legality of move
+        if (
+            e_loc[0] + x < 0 or e_loc[0] + x > 3 or 
+            e_loc[1] + y < 0 or e_loc[1] + y > 3
+            ):
+            return board, e_loc
+        
+        # swaping empty tile with its neighbor, up, down, right, or left
+        # in x, y = y, x fashoin
+        # Swap
+        board[e_loc[0]][e_loc[1]], board[e_loc[0] + x][e_loc[1] + y] = (
+            board[e_loc[0] + x][e_loc[1] + y], 
+            board[e_loc[0] + x][e_loc[1] + y]
+        )
+
+        # update empty tile location
+        e_loc[0] += x
+        e_loc[1] += y
+    
+    
