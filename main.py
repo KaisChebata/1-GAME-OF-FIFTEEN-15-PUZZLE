@@ -22,13 +22,21 @@ def on_release(key):
         # Stop listener
         return False
     elif key == keyboard.Key.up:
-        print('up')
+        board_game.board, board_game.empty_loc = (
+            board_game.move_up(board_game.board, board_game.empty_loc)
+        )
     elif key == keyboard.Key.down:
-        print('down')
-    elif key == keyboard.Key.left:
-        print('left')
+        board_game.board, board_game.empty_loc = (
+            board_game.move_down(board_game.board, board_game.empty_loc)
+        )
     elif key == keyboard.Key.right:
-        print('right')
+        board_game.board, board_game.empty_loc = (
+            board_game.move_right(board_game.board, board_game.empty_loc)
+        )
+    elif key == keyboard.Key.left:
+        board_game.board, board_game.empty_loc = (
+            board_game.move_left(board_game.board, board_game.empty_loc)
+        )
     
     board_game.refresh()
     
