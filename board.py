@@ -8,6 +8,7 @@ class Board:
     MAX_COL = 4
 
     def __init__(self):
+        """Initialize the board"""
         self.goal = [
             [" 1", " 2", " 3", " 4"], 
             [" 5", " 6", " 7", " 8"], 
@@ -18,6 +19,7 @@ class Board:
         self.empty_loc = [Board.MAX_ROW - 1, Board.MAX_COL - 1]
     
     def __repr__(self):
+        """Represent the board"""
         for i in range(Board.MAX_ROW):
             for j in range(Board.MAX_COL):
                 print(self.board[i][j], end=' ')
@@ -27,14 +29,13 @@ class Board:
         return ""
     
     def refresh(self):
-        """method that clear the terminal and printing the board"""
+        """Clear the terminal and printing the board"""
         system('clear')
         print('Welcome to the game of fifteen!\n')
         print(self)
     
     def move(self, board, e_loc, x, y):
-        """General move function, that will moves empty tile around, 
-        exchange its position with neighbor tile"""
+        """Make legal move"""
 
         # check legality of move
         if (
