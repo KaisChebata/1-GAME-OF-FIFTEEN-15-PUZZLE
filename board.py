@@ -27,7 +27,9 @@ class Board:
         return ""
     
     def refresh(self):
+        """method that clear the terminal and printing the board"""
         system('clear')
+        print('Welcome to the game of fifteen!\n')
         print(self)
     
     def move(self, board, e_loc, x, y):
@@ -55,17 +57,17 @@ class Board:
         return board, e_loc
     
     def move_up(self, board, e_loc):
-        """move_up function makes an empty tile moves up"""
+        """move_up method makes an empty tile moves up"""
         return self.move(board, e_loc, -1, 0)
     
     def move_down(self, board, e_loc):
-        """move_down function makes an empty tile moves down"""
+        """move_down method makes an empty tile moves down"""
         return self.move(board, e_loc, 1, 0)
     
     def move_right(self, board, e_loc):
-        """move_right function makes an empty tile moves right"""
+        """move_right method makes an empty tile moves right"""
         return self.move(board, e_loc, 0, 1)
     
     def move_left(self, board, e_loc):
-        """move_left function makes an empty tile moves left"""
+        """move_left method makes an empty tile moves left"""
         return self.move(board, e_loc, 0, -1)
