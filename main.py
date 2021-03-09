@@ -5,7 +5,7 @@ from board import Board
 board_game = Board()
 
 def main():
-    print(board_game)
+    board_game.refresh()
 
     # collect event until released
     with keyboard.Listener(
