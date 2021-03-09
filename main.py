@@ -5,6 +5,7 @@ from board import Board
 board_game = Board()
 
 def main():
+    board_game.shuffle()
     board_game.refresh()
 
     # collect event until released
