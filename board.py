@@ -1,11 +1,13 @@
 from copy import deepcopy
 from os import system
+from random import randint, seed
 
 class Board:
     """Models the board for the game (15 puzzle)"""
 
     MAX_ROW = 4
     MAX_COL = 4
+    SHUFFLE_MAGNITUDE = 10
 
     def __init__(self):
         """Initialize the board"""
@@ -17,6 +19,8 @@ class Board:
         ]
         self.board = deepcopy(self.goal)
         self.empty_loc = [Board.MAX_ROW - 1, Board.MAX_COL - 1]
+        self.moves = {0: self.move_up, 1: self.move_right, 
+                        2: self.move_down, 3: self.move_left}
     
     def __repr__(self):
         """Represent the board"""
@@ -34,6 +38,22 @@ class Board:
         print('Welcome to the game of fifteen!\n')
         print(self)
     
+    def shuffle(self):
+        """Randomizes board using succession of legal moves"""
+        seed()
+
+        for _ in range(Board.SHUFFLE_MAGNITUDE):
+            m = randint(0, 3)
+            self.moves[m](self.board, self.empty_loc)
+        
+        # for aesthetic purposes, move empty tiles to the lower right corner
+        for _ in range(Board.MAX_ROW):
+            self.moves[2](self.board, self.empty_loc)
+        
+        for _ in range(Board.MAX_COL):
+            self.moves[1](self.board, self.empty_loc)
+
+
     def move(self, board, e_loc, x, y):
         """Make legal move"""
 
