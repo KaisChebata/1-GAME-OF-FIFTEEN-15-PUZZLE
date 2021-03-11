@@ -11,6 +11,7 @@ class Board:
 
     def __init__(self):
         """Initialize the board"""
+
         self.goal = [
             [" 1", " 2", " 3", " 4"], 
             [" 5", " 6", " 7", " 8"], 
@@ -24,6 +25,7 @@ class Board:
     
     def __repr__(self):
         """Represent the board"""
+
         for i in range(Board.MAX_ROW):
             for j in range(Board.MAX_COL):
                 print(self.board[i][j], end=' ')
@@ -34,12 +36,20 @@ class Board:
     
     def refresh(self):
         """Clear the terminal and printing the board"""
+
         system('clear')
         print('Welcome to the game of fifteen!\n')
         print(self)
+
+        if self.board == self.goal:
+            print('Congrats! You Won!')
+            return False
+        
+        return True
     
     def shuffle(self):
         """Randomizes board using succession of legal moves"""
+
         seed()
 
         for _ in range(Board.SHUFFLE_MAGNITUDE):
@@ -92,3 +102,6 @@ class Board:
     def move_left(self, board, e_loc):
         """move_left method makes an empty tile moves left"""
         return self.move(board, e_loc, 0, -1)
+    
+    def solve(self):
+        self.board = deepcopy(self.goal)

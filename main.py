@@ -38,8 +38,10 @@ def on_release(key):
         board_game.board, board_game.empty_loc = (
             board_game.move_left(board_game.board, board_game.empty_loc)
         )
+    elif key == keyboard.Key.shift:
+        board_game.solve()
     
-    board_game.refresh()
+    return board_game.refresh()
     
 
 if __name__ == '__main__':
