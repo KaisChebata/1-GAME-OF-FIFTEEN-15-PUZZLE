@@ -1,5 +1,6 @@
 from copy import deepcopy
 from os import system
+from queue import Queue
 from random import randint, seed
 
 class Board:
@@ -104,4 +105,66 @@ class Board:
         return self.move(board, e_loc, 0, -1)
     
     def solve(self):
-        self.board = deepcopy(self.goal)
+        """Solves the game using Breadth First Search `BFS` Algorithm"""
+        # self.board = deepcopy(self.goal)
+
+        def successors(board, empty_loc):
+            """Helper function that extract the children of the current node baord"""
+            board_list = [
+                deepcopy(board), deepcopy(board),
+                deepcopy(board), deepcopy(board)
+            ]
+            empty_loc_list = [
+                list(empty_loc), list(empty_loc),
+                list(empty_loc), list(empty_loc)
+            ]
+            board_list[0], empty_loc_list[0] = (
+                self.move_up(board_list[0], empty_loc_list[0])
+            )
+            board_list[1], empty_loc_list[1] = (
+                self.move_right(board_list[1], empty_loc_list[1])
+            )
+            board_list[2], empty_loc_list[2] = (
+                self.move_down(board_list[2], empty_loc_list[2])
+            )
+            board_list[3], empty_loc_list[3] = (
+                self.move_left(board_list[3], empty_loc_list[3])
+            )
+
+            return [
+                [board_list[0], empty_loc_list[0], 0],
+                [board_list[1], empty_loc_list[1], 1],
+                [board_list[2], empty_loc_list[2], 2],
+                [board_list[3], empty_loc_list[3], 3]
+            ]
+
+        searched = []
+        fringe = Queue()
+        root = self.board
+
+        fringe.put({'board': root, 'empty_loc': self.empty_loc, 'path': []})
+
+        while True:
+            # quit if no solution is found
+            if fringe.empty():
+                return []
+            
+            # inspect current node
+            node = fringe.get()
+
+            # quit if node have the goal state
+            if node['board'] == self.goal:
+                return node['path']
+            
+            # add current node to searched set; put children in fringe
+            if node['board'] not in searched:
+                searched.append(node['board'])
+
+                for child in successors(node['board'], node['empty_loc']):
+                    if child[0] not in searched:
+                        fringe.put({
+                            'board': child[0],
+                            'empty_loc': child[1],
+                            'path': node['path'] + child[2]
+                        })
+                    
