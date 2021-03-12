@@ -165,6 +165,6 @@ class Board:
                         fringe.put({
                             'board': child[0],
                             'empty_loc': child[1],
-                            'path': node['path'] + child[2]
+                            'path': node['path'] + [child[2]]
                         })
                     
