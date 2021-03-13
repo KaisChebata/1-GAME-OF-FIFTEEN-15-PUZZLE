@@ -8,7 +8,7 @@ class Board:
 
     MAX_ROW = 4
     MAX_COL = 4
-    SHUFFLE_MAGNITUDE = 10
+    SHUFFLE_MAGNITUDE = 20
 
     def __init__(self):
         """Initialize the board"""
@@ -53,6 +53,7 @@ class Board:
 
         seed()
 
+        # Shuffle
         for _ in range(Board.SHUFFLE_MAGNITUDE):
             m = randint(0, 3)
             self.moves[m](self.board, self.empty_loc)
@@ -138,7 +139,11 @@ class Board:
                 [board_list[3], empty_loc_list[3], 3]
             ]
 
-        searched = []
+        # searched = []
+        # modify the container of serached node to be set 
+        # for optimizing time complexity, since sets in python are 
+        # hashable
+        searched = set()
         fringe = Queue()
         root = self.board
 
@@ -157,11 +162,12 @@ class Board:
                 return node['path']
             
             # add current node to searched set; put children in fringe
-            if node['board'] not in searched:
-                searched.append(node['board'])
+            if str(node['board']) not in searched: # using set instead
+                # searched.append(node['board'])
+                searched.add(str(node['board'])) # using set instead
 
                 for child in successors(node['board'], node['empty_loc']):
-                    if child[0] not in searched:
+                    if str(child[0]) not in searched:
                         fringe.put({
                             'board': child[0],
                             'empty_loc': child[1],
