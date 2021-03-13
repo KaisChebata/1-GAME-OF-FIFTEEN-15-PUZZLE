@@ -1,7 +1,5 @@
 first round TO-DO list:
-    - function to slove the game 
-    
-    
+
 
 things we have so far:
     - 2D array to represent the board
@@ -12,3 +10,4 @@ things we have so far:
     - board function to make "moves"
     - randomize the board
     - a "game over" screen
+    - function to slove the game
